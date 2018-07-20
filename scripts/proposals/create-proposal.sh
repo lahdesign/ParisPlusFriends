@@ -6,7 +6,7 @@ curl "http://localhost:4741/proposals" \
   --header "Content-Type: application/json" \
   --header "Authorization: Token token=${TOKEN}" \
   --data '{
-    "proposals": {
+    "proposal": {
       "project_title": "'"${TITLE}"'",
       "question_one": "'"${QUESTION_ONE}"'",
       "question_two": "'"${QUESTION_TWO}"'",

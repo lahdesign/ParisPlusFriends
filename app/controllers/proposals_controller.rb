@@ -1,4 +1,5 @@
 class ProposalsController < ProtectedController
+  # before_action :authenticate!
   before_action :set_proposal, only: [:show, :update, :destroy]
 
   # making it protected so that is can't be accessed unless you are signed in
@@ -15,7 +16,11 @@ class ProposalsController < ProtectedController
 
   # POST /proposals
   def create
-    @proposal = Proposal.new(proposal_params)
+    @proposal = current_user.proposals.build(proposal_params)
+    # @bucketlist = Bucketlist.new(bucketlist_params)
+    # @bucketlist.user_id = 1
+    # @bucketlist.user_id = current_user
+    p current_user
 
     if @proposal.save
       render json: @proposal, status: :created, location: @proposal
