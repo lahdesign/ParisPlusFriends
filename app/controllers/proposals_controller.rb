@@ -1,9 +1,9 @@
-class ProposalsController < ApplicationController
+class ProposalsController < ProtectedController
   before_action :set_proposal, only: [:show, :update, :destroy]
 
-  # GET /proposals
+  # making it protected so that is can't be accessed unless you are signed in
   def index
-    @proposals = Proposal.all
+    @proposals = current_user.proposals
 
     render json: @proposals
   end
