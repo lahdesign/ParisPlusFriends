@@ -1,10 +1,10 @@
-class ProposalsController < ProtectedController
+class ProposalsController < OpenReadController
   # before_action :authenticate!
   before_action :set_proposal, only: [:show, :update, :destroy]
 
   # making it protected so that is can't be accessed unless you are signed in
   def index
-    @proposals = current_user.proposals
+    @proposals = Proposal.all
 
     render json: @proposals
   end
@@ -51,6 +51,7 @@ class ProposalsController < ProtectedController
 
     # Only allow a trusted parameter "white list" through.
     def proposal_params
-      params.require(:proposal).permit(:user_id, :project_title, :question_one, :question_two, :question_three)
+      params.require(:proposal)
+.permit(:user_id, :project_title, :question_one, :question_two, :question_three)
     end
 end
